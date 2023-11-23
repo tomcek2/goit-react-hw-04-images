@@ -9,10 +9,6 @@ export class App extends Component {
   state = {
     images: [],
     query: '',
-    page: 1,
-    isLoading: false,
-    showModal: false,
-    modalImage: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
