@@ -9,6 +9,7 @@ export class App extends Component {
   state = {
     images: [],
     query: '',
+    page: 1,
   };
 
   componentDidUpdate(prevProps, prevState) {
