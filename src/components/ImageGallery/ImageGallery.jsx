@@ -9,7 +9,7 @@ export const ImageGallery = ({ images }) => {
           <img
             className={style.ImageGalleryItemImage}
             src={image.webformatURL}
-            alt=""
+            alt={image.tags}
           />
         </li>
       ))}
