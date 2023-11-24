@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loader/Loader';
+import { Button } from './Button/Button';
 
 const API_KEY = '39394747-fa1f159daeb12a76c3032126a';
 const BASE_URL = 'https://pixabay.com/api/';
@@ -36,6 +37,13 @@ export class App extends Component {
     this.setState({ query, page: 1, images: [] });
   };
 
+  handleLoadMore = () => {
+    this.setState(
+      prevState => ({ page: prevState.page + 1 }),
+      this.fetchImages
+    );
+  };
+
   fetchImages = () => {
     const { query, page } = this.state;
     const url = `${BASE_URL}?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
@@ -64,6 +72,9 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSearchSubmit} />
         <ImageGallery images={images} />
         {isLoading && <Loader />}
+        {images.length > 0 && !isLoading && (
+          <Button onLoadMore={this.handleLoadMore} />
+        )}
       </div>
     );
   }
