@@ -14,6 +14,7 @@ export class App extends Component {
     query: '',
     page: 1,
     isLoading: false,
+    selectedImage: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -34,14 +35,18 @@ export class App extends Component {
   }
 
   handleSearchSubmit = query => {
-    this.setState({ query, page: 1, images: [] });
+    this.setState({ query, page: 1, images: [] }, () => this.fetchImages());
   };
 
   handleLoadMore = () => {
     this.setState(
       prevState => ({ page: prevState.page + 1 }),
-      this.fetchImages
+      () => this.fetchImages()
     );
+  };
+
+  handleImageClick = image => {
+    console.log(image);
   };
 
   fetchImages = () => {
@@ -53,6 +58,7 @@ export class App extends Component {
     axios
       .get(url)
       .then(response => {
+        console.log(response.data);
         this.setState(prevState => ({
           images: [...prevState.images, ...response.data.hits],
           isLoading: false,
@@ -65,12 +71,12 @@ export class App extends Component {
   };
 
   render() {
-    const { images, isLoading } = this.state;
+    const { images, isLoading, selectedImage } = this.state;
 
     return (
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
-        <ImageGallery images={images} />
+        <ImageGallery images={images} onImageClick={this.handleImageClick} />
         {isLoading && <Loader />}
         {images.length > 0 && !isLoading && (
           <Button onLoadMore={this.handleLoadMore} />
