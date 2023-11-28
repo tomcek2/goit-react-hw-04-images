@@ -14,7 +14,6 @@ export class App extends Component {
     query: '',
     page: 1,
     isLoading: false,
-    selectedImage: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -45,10 +44,6 @@ export class App extends Component {
     );
   };
 
-  handleImageClick = image => {
-    console.log(image);
-  };
-
   fetchImages = () => {
     const { query, page } = this.state;
     const url = `${BASE_URL}?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
@@ -71,12 +66,12 @@ export class App extends Component {
   };
 
   render() {
-    const { images, isLoading, selectedImage } = this.state;
+    const { images, isLoading } = this.state;
 
     return (
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
-        <ImageGallery images={images} onImageClick={this.handleImageClick} />
+        <ImageGallery images={images} />
         {isLoading && <Loader />}
         {images.length > 0 && !isLoading && (
           <Button onLoadMore={this.handleLoadMore} />
