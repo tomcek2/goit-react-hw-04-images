@@ -1,113 +1,81 @@
-# React homework template
+# Image Finder App
 
-Этот проект был создан при помощи
-[Create React App](https://github.com/facebook/create-react-app). Для знакомства
-и настройки дополнительных возможностей
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
+Image Finder App application allows you to search for images using the Pixabay
+API. You can enter a search query, and the app will display a grid of images
+related to your search.
 
-## Создание репозитория по шаблону
+## Features
 
-Используй этот репозиторий организации GoIT как шаблон для создания репозитория
-своего проекта. Для этого нажми на кнопку `«Use this template»` и выбери опцию
-`«Create a new repository»`, как показано на изображении.
+- **Searchbar:** Enter your search query in the search bar and press the
+  "Search" button.
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+- **Image Gallery:** View the search results in a gallery format with the option
+  to load more images.
 
-На следующем шаге откроется страница создания нового репозитория. Заполни поле
-его имени, убедись что репозиторий публичный, после чего нажми кнопку
-`«Create repository from template»`.
+- **Load More Button:** Click the "Load more" button to fetch additional images
+  and add them to the gallery.
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+- **Image Modal:** Click on an image to open a modal with a larger view of the
+  image.
 
-После того как репозиторий будет создан, необходимо перейти в настройки
-созданного репозитория на вкладку `Settings` > `Actions` > `General` как
-показано на изображении.
+## Getting Started
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+To run this application locally, follow these steps:
 
-Проскролив страницу до самого конца, в секции `«Workflow permissions»` выбери
-опцию `«Read and write permissions»` и поставь галочку в чекбоксе. Это
-необходимо для автоматизации процесса деплоя проекта.
+1. Clone the repository:
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+   ```shell
+   git clone https://github.com/tomcek2/goit-react-hw-03-image-finder.git
+   ```
 
-Теперь у тебя есть личный репозиторий проекта, со структурой файлов и папок
-репозитория-шаблона. Далее работай с ним как с любым другим личным репозиторием,
-клонируй его себе на компьютер, пиши код, делай коммиты и отправляй их на
-GitHub.
+2. Navigate to the project directory:
 
-## Подготовка к работе
+   ```shell
+   cd image-finder-app
+   ```
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Установи базовые зависимости проекта командой `npm install`.
-3. Запусти режим разработки, выполнив команду `npm start`.
-4. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+3. Install dependencies:
 
-## Деплой
+   ```shell
+   npm install
+   ```
 
-Продакшн версия проекта будет автоматически проходить линтинг, собираться и
-деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
-ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
-необходимо в файле `package.json` отредактировать поле `homepage`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
+4. Obtain a Pixabay API key:
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+   [Pixabay API](https://pixabay.com/api/docs/)
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+5. Change your API key in App.jsx:
 
-![GitHub Pages settings](./assets/repo-settings.png)
+   ```js
+   const API_KEY = 'your_api_key';
+   ```
 
-### Статус деплоя
+## How To Run
 
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
+1. Start the development server:
 
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
+   ```shell
+   npm start
+   ```
 
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
+   The app will be accessible at http://localhost:3000 in your browser.
 
-![Deployment status](./assets/deploy-status.png)
+## Directory Structure
 
-### Живая страница
+- src: Source code of the application.
+- components: React components (Button, ImageGallery, ImageGalleryItem, Loader,
+  Modal, Searchbar).
+- style.css: Stylesheet.
+- App.js: Main application component.
+- index.js: Entry file.
 
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+## Technologies Used
 
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
+- React.js
+- Axios for API requests
+- React Loader Spinner for loading animations
+- CSS Modules for styling
 
-### Маршрутизация
+## Author
 
-Если приложение использует библиотеку `react-router-dom` для маршрутизации,
-необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
-`basename` точное название твоего репозитория. Слеш в начале строки обязателен.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Как это работает
-
-![How it works](./assets/how-it-works.png)
-
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит линтинг и сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+Tomek Cekała

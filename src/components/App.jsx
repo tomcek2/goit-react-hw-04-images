@@ -53,7 +53,6 @@ export class App extends Component {
     axios
       .get(url)
       .then(response => {
-        console.log(response.data);
         this.setState(prevState => ({
           images: [...prevState.images, ...response.data.hits],
           isLoading: false,
