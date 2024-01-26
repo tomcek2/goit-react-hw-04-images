@@ -34,7 +34,11 @@ export class App extends Component {
   }
 
   handleSearchSubmit = query => {
-    this.setState({ query, page: 1, images: [] }, () => this.fetchImages());
+    this.setState(
+      { query, page: 1, images: [] },
+      () => this.fetchImages(),
+      console.log(this.stateimages)
+    );
   };
 
   handleLoadMore = () => {
@@ -45,7 +49,7 @@ export class App extends Component {
   };
 
   fetchImages = () => {
-    const { query, page } = this.state;
+    const { query, page, images } = this.state;
     const url = `${BASE_URL}?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
 
     this.setState({ isLoading: true });
@@ -54,7 +58,10 @@ export class App extends Component {
       .get(url)
       .then(response => {
         this.setState(prevState => ({
-          images: [...prevState.images, ...response.data.hits],
+          images:
+            images.length === 0 && query === prevState.query
+              ? [...response.data.hits]
+              : [...prevState.images, ...response.data.hits],
           isLoading: false,
         }));
       })
