@@ -34,11 +34,7 @@ export class App extends Component {
   }
 
   handleSearchSubmit = query => {
-    this.setState(
-      { query, page: 1, images: [] },
-      () => this.fetchImages(),
-      console.log(this.stateimages)
-    );
+    this.setState({ query, page: 1, images: [] }, () => this.fetchImages());
   };
 
   handleLoadMore = () => {
