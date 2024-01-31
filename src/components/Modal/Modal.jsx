@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { useAppContext } from 'components/AppContext/AppContext';
 
@@ -39,4 +40,11 @@ export const Modal = () => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  largeImage: PropTypes.string.isRequired,
+  setLargeImage: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
 };

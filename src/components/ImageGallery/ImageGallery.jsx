@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useAppContext } from 'components/AppContext/AppContext';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
@@ -20,4 +21,8 @@ export const ImageGallery = () => {
       ))}
     </ul>
   );
+};
+
+Modal.propTypes = {
+  images: PropTypes.array.isRequired,
 };

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
@@ -21,4 +22,12 @@ export const App = () => {
       {images.length > 0 && !isLoading && <Button />}
     </div>
   );
+};
+
+App.propTypes = {
+  images: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  fetchImages: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  query: PropTypes.string.isRequired,
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { useAppContext } from 'components/AppContext/AppContext';
 
@@ -37,4 +38,10 @@ export const Searchbar = () => {
       </form>
     </header>
   );
+};
+
+Searchbar.propTypes = {
+  setPage: PropTypes.func.isRequired,
+  setImages: PropTypes.func.isRequired,
+  setQuery: PropTypes.func.isRequired,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { useAppContext } from 'components/AppContext/AppContext';
 
@@ -16,4 +17,8 @@ export const Button = () => {
       Load more
     </button>
   );
+};
+
+Button.propTypes = {
+  setPage: PropTypes.func.isRequired,
 };
