@@ -1,42 +1,42 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+
+import { useAppContext } from 'components/AppContext/AppContext';
+
 import style from 'components/styles.module.css';
-import PropTypes from 'prop-types';
 
-export class Modal extends Component {
-  static propTypes = {
-    large: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    onClose: PropTypes.func.isRequired,
-  };
+export const Modal = () => {
+  const { showModal, largeImage, setLargeImage, setShowModal } =
+    useAppContext();
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.code === 'Escape') {
+        setShowModal(false);
+        setLargeImage(null);
+      }
+    };
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
+    const handleBackdropClick = e => {
+      if (e.target.currentSrc === largeImage) {
+        setShowModal(false);
+        setLargeImage(null);
+      }
+    };
 
-  handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      this.props.onClose();
-    }
-  };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('click', handleBackdropClick);
 
-  handleBackdropClick = event => {
-    if (event.currentTarget === event.target) {
-      this.props.onClose();
-    }
-  };
-  render() {
-    const { large, tags } = this.props;
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('click', handleBackdropClick);
+    };
+  }, [showModal]);
 
-    return (
-      <div className={style.Overlay} onClick={this.handleBackdropClick}>
-        <div className={style.Modal}>
-          <img src={large} alt={tags} />
-        </div>
+  return (
+    <div className={style.Overlay}>
+      <div className={style.Modal}>
+        <img src={largeImage} alt="" />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

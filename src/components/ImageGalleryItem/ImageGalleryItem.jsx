@@ -1,41 +1,36 @@
-import React, { Component } from 'react';
-import style from 'components/styles.module.css';
-import { Modal } from 'components/Modal/Modal';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export class ImageGalleryItem extends Component {
-  state = {
-    showModal: false,
-    largeImageURL: this.props.largeImageURL,
+import { Modal } from 'components/Modal/Modal';
+import { useAppContext } from 'components/AppContext/AppContext';
+
+import style from 'components/styles.module.css';
+
+export const ImageGalleryItem = ({ webformatURL, largeImageURL, tags }) => {
+  const { setLargeImage, showModal, setShowModal } = useAppContext();
+
+  const handleImageClick = image => {
+    setLargeImage(image);
+    setShowModal(true);
   };
 
-  static propTypes = {
-    webformatURL: PropTypes.string.isRequired,
-    largeImageURL: PropTypes.string.isRequired,
-    tags: PropTypes.string.isRequired,
-  };
+  return (
+    <li className={style.ImageGalleryItem}>
+      <img
+        className={style.ImageGalleryItemImage}
+        src={webformatURL}
+        alt={tags}
+        onClick={() => {
+          handleImageClick(largeImageURL);
+        }}
+      />
+      {showModal && <Modal />}
+    </li>
+  );
+};
 
-  toggleModal = () => {
-    this.setState(prevState => ({
-      showModal: !prevState.showModal,
-    }));
-  };
-
-  render() {
-    const { largeImageURL, showModal } = this.state;
-    const { webformatURL, tags } = this.props;
-    const { toggleModal } = this;
-    return (
-      <li className={style.ImageGalleryItem} onClick={toggleModal}>
-        <img
-          className={style.ImageGalleryItemImage}
-          src={webformatURL}
-          alt={tags}
-        />
-        {showModal && (
-          <Modal onClose={toggleModal} large={largeImageURL} alt={tags} />
-        )}
-      </li>
-    );
-  }
-}
+ImageGalleryItem.propTypes = {
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+};
